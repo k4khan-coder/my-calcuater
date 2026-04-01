@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title> Chandni's Calculator</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {  
+      font-family: 'Segoe UI', sans-serif;  
+      background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 50%, #e8f4f8 100%);
+      min-height: 100vh; display: flex; justify-content: center; align-items: center; padding: 20px;
+      transition: background 0.5s ease;
+    }
+    body.dark {
+      background: linear-gradient(135deg, #1c1c1c 0%, #343a40 50%, #495057 100%);
+    }
+    .calc {  
+      background: linear-gradient(145deg, #f8f9fa, #e9ecef);  
+      width: 100%; max-width: 380px; padding: 25px; border-radius: 25px;  
+      box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+      border: 2px solid #dee2e6;
+      transition: background 0.5s ease, color 0.5s ease;
+    }
+    body.dark .calc {
+      background: #212529;
+      color: #f8f9fa;
+      border: 2px solid #495057;
+    }
+    h2 { 
+      color: #495057; margin-bottom: 25px; text-align: center; font-size: 22px; 
+    }
+    body.dark h2 {
+      color: #f8f9fa;
+    }
+    #result {  
+      width: 100%; height: 110px; padding: 0 25px; margin-bottom: 25px;  
+      font-size: 40px; text-align: right; 
+      border: none; background: #fff; border-radius: 15px; 
+      box-shadow: inset 0 3px 6px rgba(0,0,0,0.1);
+      transition: background 0.5s ease;
+    }
+    body.dark #result {
+      background: #343a40;
+      color: #f8f9fa;
+    }
+    .buttons {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 15px;
+    }
+    button {
+      padding: 20px; font-size: 20px; border: none; border-radius: 12px;
+      background: #dee2e6; cursor: pointer; transition: transform 0.1s ease, background 0.3s ease;
+    }
+    button:hover {
+      background: #adb5bd; color: #fff;
+    }
+    button:active {
+      transform: scale(0.9); /* Hinglish: button press animation */
+    }
+    .toggle {
+      margin-bottom: 15px; text-align: center;
+    }
+    .toggle button {
+      background: #6c757d; color: #fff; padding: 10px 20px; font-size: 16px;
+    }
+  </style>
+</head>
+<body>
+  <div class="calc">
+    <h2> Chandni's Calculator</h2>
+    <div class="toggle">
+      <button onclick="toggleDarkMode()">🌙 Toggle Dark Mode</button>
+    </div>
+    <input type="text" id="result" readonly>
+    <div class="buttons">
+      <!-- Numbers -->
+      <button onclick="press('7')">7</button>
+      <button onclick="press('8')">8</button>
+      <button onclick="press('9')">9</button>
+      <button onclick="press('/')">÷</button>
+
+      <button onclick="press('4')">4</button>
+      <button onclick="press('5')">5</button>
+      <button onclick="press('6')">6</button>
+      <button onclick="press('*')">×</button>
+
+      <button onclick="press('1')">1</button>
+      <button onclick="press('2')">2</button>
+      <button onclick="press('3')">3</button>
+      <button onclick="press('-')">−</button>
+
+      <button onclick="press('0')">0</button>
+      <button onclick="press('.')">.</button>
+      <button onclick="calculate()">=</button>
+      <button onclick="press('+')">+</button>
+
+      <!-- Clear button -->
+      <button style="grid-column: span 4; background:#ff6b6b; color:#fff;" onclick="clearResult()">AC</button>
+    </div>
+  </div>
+
+  <script>
+    // Hinglish: yeh function button press handle karega
+    function press(value) {
+      document.getElementById('result').value += value;
+    }
+
+    // Hinglish: yeh function calculation karega
+    function calculate() {
+      let res = document.getElementById('result').value;
+      try {
+        document.getElementById('result').value = eval(res);
+      } catch {
+        document.getElementById('result').value = "Error";
+      }
+    }
+
+    // Hinglish: yeh function result clear karega
+    function clearResult() {
+      document.getElementById('result').value = "";
+    }
+
+    // Hinglish: yeh function dark mode toggle karega
+    function toggleDarkMode() {
+      document.body.classList.toggle('dark');
+    }
+  </script>
+</body>
+</html>
